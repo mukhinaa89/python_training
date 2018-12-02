@@ -72,14 +72,8 @@ class AddContact(unittest.TestCase):
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys(email)
         # add Date of birth
-        #wd.find_element_by_name("bday").click() - выпадающий список дня рождения
         Select(wd.find_element_by_name("bday")).select_by_visible_text(birth_day)
-        #wd.find_element_by_xpath("//option[@value='16']").click() - не заполняется месяц -удалить?
-        #wd.find_element_by_name("bmonth").click() - выпадающий список месяца рождения
         Select(wd.find_element_by_name("bmonth")).select_by_visible_text(birth_month)
-        #wd.find_element_by_xpath("//option[@value='January']").click() - не заполняется месяц -удалить?
-        #wd.find_element_by_name("byear").click()
-        #wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys(birth_year)
         # submit contact creation
         wd.find_element_by_xpath("//input[21]").click()
