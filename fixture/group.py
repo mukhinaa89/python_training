@@ -18,6 +18,7 @@ class GroupHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_groups_pages()
 
+
     def fill_group_form(self, group):
         wd = self.app.wd
         self.change_field_value("group_name", group.name)
