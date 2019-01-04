@@ -69,7 +69,6 @@ class ContactHelper:
         self.select_first_contact()
         # open modification form
         wd.find_element_by_xpath("//img[@alt='Edit']").click()
-        #(".//*[normalize-space(text()) and normalize-space(.)='first']").click() #wd.find_element_by_title("Edit").click()
         # fill contact form
         self.fill_contact_form(new_contact_data)
         # submit modification
