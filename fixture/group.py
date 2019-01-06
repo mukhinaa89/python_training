@@ -61,7 +61,6 @@ class GroupHelper:
     def select_first_group(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
-        
 
     def modify_first_group(self):
         self.modify_group_by_index(0)
