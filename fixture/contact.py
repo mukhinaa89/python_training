@@ -85,8 +85,7 @@ class ContactHelper:
         wd = self.app.wd
         self.open_home_page()
         self.select_contact_by_index(index)
-        # open modification form
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        self.open_modification_form(index)
         # fill contact form
         self.fill_contact_form(new_contact_data)
         # submit modification
@@ -94,6 +93,9 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
+    def open_modification_form(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
 
     def count(self):
         wd = self.app.wd
