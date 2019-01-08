@@ -32,12 +32,13 @@ class ContactHelper:
         self.change_field_value_contact("company", contact.company)
         self.change_field_value_contact("address", contact.address)
         # add Phones and Email
-        self.change_field_value_contact("home", contact.home_phone)
-        self.change_field_value_contact("mobile", contact.mobile_phone)
-        self.change_field_value_contact("work", contact.work_phone)
+        self.change_field_value_contact("home", contact.homephone)
+        self.change_field_value_contact("mobile", contact.mobilephone)
+        self.change_field_value_contact("work", contact.workphone)
+        self.change_field_value_contact("secondary", contact.secondaryphone)
         self.change_field_value_contact("fax", contact.fax)
         self.change_field_value_contact("email", contact.email)
-        self.change_field_value_contact("home", contact.home_phone)
+        self.change_field_value_contact("home", contact.homephone)
         # add Date of birth
         self.change_field_value_contact("byear", contact.birth_year)
 
@@ -116,10 +117,27 @@ class ContactHelper:
             wd = self.app.wd
             self.open_home_page()
             self.contact_cache = []
-            for element in wd.find_elements_by_css_selector("tr[name=entry]"):
-                cells = element.find_elements_by_tag_name("td")
-                id = element.find_elements_by_css_selector("tr[td]")
-                firstname = cells[2].text
+            for row in wd.find_elements_by_name("entry"):
+                cells = row.find_elements_by_tag_name("td")
+                id = row.find_elements_by_css_selector("tr[td]")
+                firstname = cells[1].text
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 self.contact_cache.append(Contact(firstname=firstname, id=id))
         return list(self.contact_cache)
+
+
+    def open_contact_to_edit_by_index(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[7]
+        cell.find_element_by_tag_name("a").click()
+
+
+
+    def open_contact_view_by_index(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[6]
+        cell.find_element_by_tag_name("a").click()
