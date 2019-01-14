@@ -168,8 +168,8 @@ class ContactHelper:
         email2 = wd.find_element_by_name("email2").get_attribute("value")
         email3 = wd.find_element_by_name("email3").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id, homephone=homephone, mobilephone=mobilephone,
-                       workphone=workphone, secondaryphone= secondaryphone,  address=address, address2=address2,
-                       email= email, email2=email2, email3=email3)
+                       workphone=workphone, secondaryphone=secondaryphone,  address=address, address2=address2,
+                       email=email, email2=email2, email3=email3)
 
 
     def get_contact_from_view_page(self, index):
