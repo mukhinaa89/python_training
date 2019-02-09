@@ -124,8 +124,8 @@ class ContactHelper:
             for row in wd.find_elements_by_name("entry"):
                 cells = row.find_elements_by_tag_name("td")
                 id = row.find_elements_by_css_selector("tr[td]")
-                firstname = cells[1].text
-                lastname = cells[2].text
+                firstname = cells[2].text
+                lastname = cells[1].text
                 address = cells[3].text
                 all_emails = cells[4].text
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
