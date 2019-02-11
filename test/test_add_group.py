@@ -11,7 +11,7 @@ def random_string(prefix, maxlen):
 
 testdata = [
     Group(name=random_string("name", 10), header=random_string("header", 20), footer=random_string("footer", 20))
-    for name in range(5)
+    for name in range(1)
 ]
 
 
