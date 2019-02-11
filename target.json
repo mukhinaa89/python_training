@@ -1,5 +1,5 @@
-{
-  "baseUrl": "http://localhost/addresbook/",
-  "username": "admin",
-  "password": "secret"
-}
+  {
+    "baseUrl": "http://localhost/addressbook/",
+    "username": "admin",
+    "password": "secret"
+    }
