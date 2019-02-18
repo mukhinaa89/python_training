@@ -17,11 +17,11 @@ class ORMFixture:
         footer = Optional(str, column='group_footer')
 
     class ORMContact(db.Entity):
-        table_ = 'addressbook'
+        _table_ = 'addressbook'
         id = PrimaryKey(int, column='id')
         firstname = Optional(str, column='firstname')
-        lasrname = Optional(str, column='lastname')
-        deprecated = Optional(datetime, column='deprecated')
+        lastname = Optional(str, column='lastname')
+        deprecated = Optional(str, column='deprecated')
 
 
     def __init__(self, host, name, user, password):
