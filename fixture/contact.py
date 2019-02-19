@@ -1,6 +1,7 @@
 from model.contact import Contact
 import re
 
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -9,7 +10,7 @@ class ContactHelper:
 
     def return_to_home_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("/addressbook") and len(wd.find_elements_by_name("add"))>0):
+        if not (wd.current_url.endswith("/addressbook") and len(wd.find_elements_by_name("add")) > 0):
             wd.find_element_by_link_text("home page").click()
 
     def create(self, contact):
@@ -167,6 +168,7 @@ class ContactHelper:
         row = wd.find_elements_by_name("entry")[index]
         cell = row.find_elements_by_tag_name("td")[6]
         cell.find_element_by_tag_name("a").click()
+
 
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd

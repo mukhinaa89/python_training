@@ -67,16 +67,19 @@ class GroupHelper:
         self.group_cache = None
 
 
+    def select_group_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
+
     def select_first_group(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
+
     def modify_first_group(self):
         self.modify_group_by_index(0)
 
-    def select_group_by_id(self, id):
-        wd = self.app.wd
-        wd.find_element_by_css_selector("input[value='%s']" % id).click()
 
     def modify_group_by_index(self, index, new_group_data):
         wd = self.app.wd
