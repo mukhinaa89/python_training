@@ -4,6 +4,7 @@ from model.contact import Contact
 from pymysql.converters import decoders
 
 
+# noinspection PyTypeChecker
 class ORMFixture:
 
     db = Database()
@@ -53,3 +54,25 @@ class ORMFixture:
     @db_session
     def get_contact_list(self):
         return self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact if c.deprecated is None))
+
+
+    @db_session
+    def get_contacts_in_group(self, group):
+        orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
+        return self.convert_contacts_to_model(orm_group.contacts)
+
+
+    @db_session
+    def get_contacts_not_in_group(self, group):
+        orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
+        return self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group not in c.groups))
+
+
+    @db_session
+    def is_contact_in_group(self, group, contact):
+        orm_group = list(select(g for g in ORMFixture.ORMGroup if g.id == group.id))[0]
+        orm_contact = self.convert_contacts_to_model(select(c for c in ORMFixture.ORMContact if c.deprecated is None and orm_group in c.groups))[0]
+        if orm_contact == contact:
+            return True
+        else:
+            return False
