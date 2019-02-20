@@ -94,6 +94,20 @@ class ContactHelper:
         self.contact_cache = None
 
 
+    def modify_contact_by_id(self, contact, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.open_contact_to_modify_by_id(id)
+        self.fill_contact_form(contact)
+        wd.find_element_by_name("update").click()
+        self.contact_cache = None
+
+    def open_contact_to_modify_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element_by_xpath(
+            "//input[@id='%s']/parent::td/following-sibling::td[7]//img[@title='Edit']" % id).click()
+
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
