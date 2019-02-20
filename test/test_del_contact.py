@@ -11,7 +11,7 @@ def test_delete_some_contact(app, db, check_ui):
     new_contacts = db.get_contact_list()
     assert len(old_contacts) - 1 == len(new_contacts)
     old_contacts.remove(contact)
-    assert old_contacts == new_contacts
+    assert new_contacts == old_contacts
     def clean(contact):
         return Contact(id=contact.id, lastname=contact.lastname.strip(), firstname=contact.firstname.strip())
     if check_ui:
