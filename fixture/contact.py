@@ -205,12 +205,30 @@ class ContactHelper:
 
 
     def get_contact_from_view_page(self, index):
+        def clear(s):
+            return re.sub("[() -]", "", s)
         wd = self.app.wd
         self.open_contact_view_by_index(index)
         text = wd.find_element_by_id("content").text
-        homephone = re.search("H: (.*)", text).group(1)
-        workphone = re.search("W: (.*)", text).group(1)
-        mobilephone = re.search("M: (.*)", text).group(1)
-        secondaryphone = re.search("P: (.*)", text).group(1)
-        return Contact(homephone=homephone, mobilephone=mobilephone,
-                       workphone=workphone, secondaryphone=secondaryphone)
+        try:
+            homephone = re.search("H: (.*)", text).group(1)
+        except AttributeError:
+            homephone = ''
+        try:
+            workphone = re.search('W: (.*)', text).group(1)
+        except AttributeError:
+            workphone = ''
+        try:
+            mobilephone = re.search('M: (.*)', text).group(1)
+        except AttributeError:
+            mobilephone = ''
+        try:
+            secondaryphone = re.search("P: (.*)", text).group(1)
+        except AttributeError:
+            secondaryphone = ''
+        cells = wd.find_elements_by_xpath("//div[@id='content']/a")
+        cells = cells[:-1]
+        return Contact(all_phones_from_home_page='\n'.join(filter(lambda x: x !='',
+                                                                  map(lambda x: clear(x),
+                                                                      filter(lambda x: x is not None,[homephone, mobilephone, workphone, secondaryphone])))),
+                       all_emails_from_home_page='\n'.join(map(lambda x: x.text, cells)))
